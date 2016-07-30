@@ -1,0 +1,27 @@
+<head>
+  <title>leavingTime</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+  {{#each timeObjs}}
+    {{> timeTemplate}}
+  {{/each}}
+  {{> hello}}
+  {{> addTime}}
+</body>
+
+<template name="hello">
+  <button id="fart">Click Me</button>
+  <button id="button">Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="timeTemplate">
+  <li>{{leavingTime.toString}}</li>
+</template>
+
+<template name="addTime">
+  <input id="timepicker" class="timepicker"/>
+  <button id="btnAdd">Add New Leave Time Proposal</button>
+</template>
