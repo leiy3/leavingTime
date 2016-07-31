@@ -16,15 +16,6 @@ Template.hello.helpers({
   },
 });
 
-Template.hello.events({
-  'click #button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
-
-
-
 Template.addTime.events({
   'click button'(event, instance) {
     var sTimeVals = $('#timepicker').val().split(" ");
@@ -34,16 +25,14 @@ Template.addTime.events({
     if (sAMPM === "PM") {
       iTimeHr += 12;
     }
-    var d = new Date();
-    d.setHours(iTimeHr,iTimeMin,0); //Set seconds to zero
-    TimeStuff.insert({
-      leavingTime: d
-    });
+    Meteor.call("addTime", iTimeHr, iTimeMin);
   }
 })
 
 Template.body.helpers({
   timeObjs() {
-    return TimeStuff.find({});
+    var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 });
+    console.log(docStuff);
+    return docStuff;
   }
 })

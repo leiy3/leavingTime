@@ -8,7 +8,11 @@ Meteor.startup(() => {
     addTime: function(iTimeHr, iTimeMin) {
       var date = new Date();
       date.setHours(iTimeHr,iTimeMin,0); //Set seconds to zero
-      console.log("");
+      console.log(date.toString());
+      TimeStuff.insert(
+        { group : "ourgroup2", times: [date]}
+      );
     }
   })
 });
+
