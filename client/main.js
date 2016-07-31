@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import { TimeStuff } from '../api.js';
+import '../account-config.js';
 
 import './main.html'
 

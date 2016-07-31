@@ -22,3 +22,5 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 mrt:bootstrap-3
 quackware:jplack-bootstrap-timepicker
 twbs:bootstrap
+accounts-ui
+accounts-password

@@ -2,12 +2,14 @@ import { Meteor } from 'meteor/meteor';
 
 import { TimeStuff } from '../api.js';
 
+import { Accounts } from 'meteor/accounts-base';
+
 Meteor.startup(() => {
   // code to run on server at startup
   var currentData = TimeStuff.findOne({ group: "ourgroup"});
   if (currentData === undefined) {
     console.log("Added default group");
-    TimeStuff.insert({ group: "ourgroup", proposals: [] });
+    TimeStuff.insert({ group: "ourgroup", people:[], proposals: [] });
   }
 
   Meteor.methods({
@@ -24,6 +26,13 @@ Meteor.startup(() => {
       console.log(existingTime);
 
     }
-  })
+  });
+
+  Accounts.onCreateUser((options, user) => {
+  TimeStuff.update({group: "ourgroup"},
+    {$push: {people: user._id}});
+  // Don't forget to return the new user object at the end!
+  return user;
+  });
 });
 
