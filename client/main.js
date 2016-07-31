@@ -20,10 +20,23 @@ Template.addTime.events({
 
 Template.body.helpers({
   timeObjs() {
-    var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 }).fetch();
-    if (docStuff[0] === undefined) {
+    var docStuff = TimeStuff.findOne({ group: "ourgroup" }, { "proposals": 1 });
+    if (docStuff === undefined) {
       return [];
     }
-    return docStuff[0].times;
+    return docStuff.proposals;
   }
 })
+
+Template.timeTemplate.helpers({
+  formatTime(dateObj) {
+    var hours = dateObj.getHours();
+    var minutes = dateObj.getMinutes();
+    if (minutes < 10) minutes = "0" + minutes;
+    var sAMPM = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    var timeString = hours + ":" + minutes + " " + sAMPM;
+    return timeString;
+  }
+});

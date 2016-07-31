@@ -7,17 +7,22 @@ Meteor.startup(() => {
   var currentData = TimeStuff.findOne({ group: "ourgroup"});
   if (currentData === undefined) {
     console.log("Added default group");
-    TimeStuff.insert({ group: "ourgroup", times: [] });
+    TimeStuff.insert({ group: "ourgroup", proposals: [] });
   }
 
   Meteor.methods({
     addTime: function(iTimeHr, iTimeMin) {
       var date = new Date();
-      date.setHours(iTimeHr,iTimeMin,0); //Set seconds to zero
-      TimeStuff.update(
-        { group : "ourgroup"},
-        { $push: { times: date } }
-      );
+      date.setHours(iTimeHr,iTimeMin,0,0); //Set seconds and ms to zero
+      var existingTime = TimeStuff.findOne({ group: "ourgroup", proposals: {$elemMatch: {leavingTime: date} } });
+      if (existingTime === undefined) {
+        TimeStuff.update(
+          { group : "ourgroup"},
+          { $push: { proposals: { leavingTime: date, voting: [] } } }
+        );
+      }
+      console.log(existingTime);
+
     }
   })
 });

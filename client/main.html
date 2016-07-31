@@ -3,18 +3,37 @@
 </head>
 
 <body>
-  <h1>Welcome to Leaving Time Logger!</h1>
-  {{#each timeObjs}}
-    {{> timeTemplate}}
-  {{/each}}
-  {{> addTime}}
+  <div class="row">
+    <div class="col-md-2"></div>
+    <h1 class="col-md-8">Welcome to Leaving Time Logger!</h1>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      {{#each timeObjs}}
+        {{> timeTemplate}}
+      {{/each}}
+    </div>
+    <div class="col-md-6">
+      {{> addTime}}
+    </div>
+  </div>
 </body>
 
 <template name="timeTemplate">
-  <li>{{this.toString}}</li>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">{{formatTime this.leavingTime}}</div>
+    <div class="col-md-2"></div>
+  </div>
 </template>
 
 <template name="addTime">
-  <input id="timepicker" class="timepicker"/>
-  <button id="btnAdd">Add New Leave Time Proposal</button>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <i class="glyphicon glyphicon-time"></i>
+    <input id="timepicker" class="timepicker"/>
+    <button id="btnAdd btn-default">Add New Leave Time Proposal</button>
+  </div>
 </template>
