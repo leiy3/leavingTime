@@ -5,17 +5,6 @@ import { TimeStuff } from '../api.js';
 
 import './main.html'
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
 Template.addTime.events({
   'click button'(event, instance) {
     var sTimeVals = $('#timepicker').val().split(" ");
@@ -33,10 +22,8 @@ Template.body.helpers({
   timeObjs() {
     var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 }).fetch();
     if (docStuff[0] === undefined) {
-      console.log("dudude");
       return [];
     }
-    console.log(docStuff[0]);
     return docStuff[0].times;
   }
 })
