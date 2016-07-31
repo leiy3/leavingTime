@@ -31,8 +31,12 @@ Template.addTime.events({
 
 Template.body.helpers({
   timeObjs() {
-    var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 });
-    console.log(docStuff.one());
-    return docStuff.one().times;
+    var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 }).fetch();
+    if (docStuff[0] === undefined) {
+      console.log("dudude");
+      return [];
+    }
+    console.log(docStuff[0]);
+    return docStuff[0].times;
   }
 })

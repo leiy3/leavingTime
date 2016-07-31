@@ -4,9 +4,9 @@ import { TimeStuff } from '../api.js';
 
 Meteor.startup(() => {
   // code to run on server at startup
-  var currentData = TimeStuff.find({ group: "ourgroup "});
-  if (currentData === null) {
-    console.log("should not print");
+  var currentData = TimeStuff.findOne({ group: "ourgroup"});
+  if (currentData === undefined) {
+    console.log("Added default group");
     TimeStuff.insert({ group: "ourgroup", times: [] });
   }
 
