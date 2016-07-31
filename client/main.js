@@ -32,7 +32,7 @@ Template.addTime.events({
 Template.body.helpers({
   timeObjs() {
     var docStuff = TimeStuff.find({ group: "ourgroup" }, { "times": 1 });
-    console.log(docStuff);
-    return docStuff;
+    console.log(docStuff.one());
+    return docStuff.one().times;
   }
 })
